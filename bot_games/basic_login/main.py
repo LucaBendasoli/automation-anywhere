@@ -1,5 +1,4 @@
-"""
-This module is the main file that contains the logic for solving
+"""This module is the main file that contains the logic for solving
 the Basic Login Challange from Automation Anywhere - Bot Games. """
 
 import os

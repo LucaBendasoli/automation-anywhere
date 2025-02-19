@@ -1,6 +1,5 @@
-"""
-This module contains custom utilitary functions to work with selenium.
-"""
+"""This module contains custom utilitary functions to work with selenium."""
+
 from typing import Callable, Tuple, cast
 
 # Selenium
