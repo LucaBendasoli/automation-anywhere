@@ -1,20 +1,59 @@
-"""Este é o arquivo principal da solução do exercício "Basic Login" do automation anywhere bot games. """
+"""
+This module is the main file that contains the logic for solving
+the Basic Login Challange from Automation Anywhere - Bot Games. """
 
 import os
+import time
+from typing import cast
 from dotenv import load_dotenv
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from config.config import CHALLANGE_URL
+from selenium.webdriver.remote.webdriver import WebDriver
+from config.config import CHALLANGE_URL, XPATHS, CREDENTIALS
+from utils.utils import click_element_by_xpath, send_keys_by_xpath
 
-load_dotenv('.env')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(current_dir, '.env')
 
-driver = webdriver.Chrome()
-driver.get(CHALLANGE_URL)
-driver.find_element(By.XPATH, '//*[contains(text(), "Aceitar cookies")]').click()
-driver.find_element(By.XPATH, '//*[@aria-label="Community login"]').click()
-driver.find_element(By.XPATH, '//*[@placeholder="*Email"]').send_keys(os.getenv('USERNAME'))
-driver.find_element(By.XPATH, '//*[@placeholder="*Email"]/../../following-sibling::div[1]').click()
-driver.find_element(By.XPATH, "//input[@placeholder='Password']").send_keys(os.getenv('PASSWORD'))
-driver.find_element(By.XPATH, "//input[@placeholder='Password']/../../following-sibling::div[1]/div/div/button").click()
+def login_community(driver: WebDriver) -> None:
+    """Log into the community to access the challange.
+
+    Args:
+        driver (WebDriver): Webdriver where the automation will occour."""
+    click_element_by_xpath(driver, XPATHS['LANDING_PAGE']['ACCEPT_COOKIES'])
+    click_element_by_xpath(driver, XPATHS['LANDING_PAGE']['COMMUNITY_LOGIN'])
+    send_keys_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['EMAIL'], cast(str, os.getenv('EMAIL')), 30)
+    click_element_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['SUBMIT_EMAIL'])
+    send_keys_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['PASSWORD'], cast(str, os.getenv('PASSWORD')))
+    click_element_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['SUBMIT_FORM'])
+
+def start_challange() -> WebDriver:
+    """Open the WebDriver, access the URL, and log into the community.
+    Start the basic_login challenge, and once it starts, return the WebDriver.
+
+    Returns:
+		driver (WebDriver): WebDriver where the challange was started.
+    """
+    driver = webdriver.Chrome()
+    driver.get(CHALLANGE_URL)
+    login_community(driver)
+    return driver
+
+def do_challange(driver: WebDriver) -> None:
+    """Logic that solves the basic challange, loging in succesfully.
+    Waits 10 seconds to show the results.
+
+    Args:
+        driver (WebDriver): Logged in WebDriver where the challange wil be completed."""
+    send_keys_by_xpath(driver, XPATHS['EXERCISES']['BASIC_LOGIN']['LOGIN'], CREDENTIALS['BASIC_LOGIN']['EMAIL'], 30)
+    send_keys_by_xpath(driver, XPATHS['EXERCISES']['BASIC_LOGIN']['PASSWORD'], CREDENTIALS['BASIC_LOGIN']['PASSWORD'])
+    click_element_by_xpath(driver, XPATHS['EXERCISES']['BASIC_LOGIN']['SIGN_IN'])
+    time.sleep(10)
+
+def main() -> None:
+    """Execute the basic login automation."""
+    driver = start_challange()
+    do_challange(driver)
+
+if __name__ == "__main__":
+    load_dotenv(env_path)
+    main()

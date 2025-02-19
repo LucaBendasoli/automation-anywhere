@@ -16,7 +16,7 @@ XPATHS = {
 	},
 	'COMMUNITY_LOGIN' : {
 		'EMAIL' : '//*[@placeholder="*Email"]',
-		'SUBMT_EMAIL' : '//*[@placeholder="*Email"]/../../following-sibling::div[1]',
+		'SUBMIT_EMAIL' : '//*[@placeholder="*Email"]/../../following-sibling::div[1]',
 		'PASSWORD' : '//input[@placeholder="Password"]',
 		'SUBMIT_FORM' : '//*[contains(text(), "Log in")]'
 	},

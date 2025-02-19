@@ -1,10 +1,41 @@
 # Basic Login
 
-First automation anywhere bot games challange.
+My first automation anywhere challange, it's a simple login form. I choosed selenium for the automation.
+A .env file was used to store community login credentials so create one youself before running the main.py file.
+
+## Solution Structure
+
+- basic_login/
+  - config/
+    - config.py -> *Core variables*
+  - utils/
+    - utils.py -> *Utility functions*
+  - media/ -> *Images for README*
+  - .env -> *Community credentials*
+  - main.py -> *Main file*
+  - README.md -> *Documentation*
+
+## Solution Review
+
+"I choosed Selenium because is a great tool for robotic process automation on websites, and it
+helped me with this login form.
+After thinking about how I wanted to structure the folders and files for this project, I started
+by creating and documenting a utils file that contains the functions I normally use to make clicking,
+writing, and finding WebElements in Selenium easier.
+
+Next, I mapped out all the locators I needed and created a config file to store them for easy access and better readability.
+Last but not least, I structured the main file and tested everything as a whole. Throughout the process, I used Jupyter’s interactive terminal to test each step, which really helped me figure out how to code things efficiently."
+
+— *Luca Agostinho Bendasoli Silva (Myself)*
+
+
+## Results
+
+![Results](media/results.png)
 
 ---
 
-## Review
+## Challange:
 
 A great place to start for anyone new to Automation Anywhere development. Many web applications
 used by bots require some sort of login - in this challenge page, developers are asked to do
