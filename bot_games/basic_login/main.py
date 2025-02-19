@@ -1,7 +1,7 @@
 """This module is the main file that contains the logic for solving
 the Basic Login Challange from Automation Anywhere - Bot Games. """
 
-# Python imports
+# Internal Python imports
 import sys
 import os
 import time

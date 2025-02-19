@@ -1,8 +1,9 @@
 """This module contains custom utilitary functions to work with selenium."""
 
+# Internal Python imports
 from typing import Callable, Tuple, cast
 
-# Selenium
+# External libraries imports
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webdriver import WebElement
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
