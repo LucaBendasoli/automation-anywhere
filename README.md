@@ -1,4 +1,13 @@
-# automation-anywhere-bot-games
- Repositório em que resolvo exercícios de automação propostos pelo bot games da automation anywhere
+# **automation-anywhere**
 
-*Ainda estou decidindo como será minha arquitetura de pastas neste repositório, fique ciente que pode mudar*
+## This repository is dedicated to solving **Automation Anywhere** challanges, like **bot games**.
+
+## **Repository Structure**
+
+- automation_anywhere/ -> *repository folder*
+  - bot_games/ -> *bot games challanges*
+    - various_folders/ -> *challanges solutions*
+
+### Each challange has it's **own README.md** file that will give more informations about it.
+
+*I'm still deciding how I will structure this repository, so be aware it may change.*
