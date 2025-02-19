@@ -1,23 +1,24 @@
 """This module is the main file that contains the logic for solving
 the Basic Login Challange from Automation Anywhere - Bot Games. """
 
+# Python imports
 import sys
 import os
 import time
 from typing import cast
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+# External libraries imports
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.remote.webdriver import WebDriver
-from shared.config.config import URLS, XPATHS, CREDENTIALS
-from shared.utils.utils import click_element_by_xpath, send_keys_by_xpath
 
+# Paths configuration
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'shared', '.env'))
 
-# current_dir = os.path.dirname(os.path.abspath(__file__))
-# env_path = os.path.join(current_dir, '.env')
+# Project internal modules imports
+from shared.config.config import URLS, XPATHS, CREDENTIALS
+from shared.utils.utils import click_element_by_xpath, send_keys_by_xpath
 
 def login_community(driver: WebDriver) -> None:
     """Log into the community to access the challange.
