@@ -6,12 +6,7 @@ A .env file was used to store community login credentials so create one youself 
 ## Solution Structure
 
 - basic_login/
-  - config/
-    - config.py -> *Core variables*
-  - utils/
-    - utils.py -> *Utility functions*
   - media/ -> *Images for README*
-  - .env -> *Community credentials*
   - main.py -> *Main file*
   - README.md -> *Documentation*
 
