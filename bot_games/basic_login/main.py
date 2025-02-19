@@ -27,7 +27,7 @@ def login_community(driver: WebDriver) -> None:
         driver (WebDriver): Webdriver where the automation will occour."""
     click_element_by_xpath(driver, XPATHS['LANDING_PAGE']['ACCEPT_COOKIES'])
     click_element_by_xpath(driver, XPATHS['LANDING_PAGE']['COMMUNITY_LOGIN'])
-    send_keys_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['EMAIL'], cast(str, os.getenv('EMAIL')), 30)
+    send_keys_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['EMAIL'], cast(str, os.getenv('EMAIL')), timeout=30)
     click_element_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['SUBMIT_EMAIL'])
     send_keys_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['PASSWORD'], cast(str, os.getenv('PASSWORD')))
     click_element_by_xpath(driver, XPATHS['COMMUNITY_LOGIN']['SUBMIT_FORM'])
@@ -50,7 +50,7 @@ def do_challange(driver: WebDriver) -> None:
 
     Args:
         driver (WebDriver): Logged in WebDriver where the challange wil be completed."""
-    send_keys_by_xpath(driver, XPATHS['EXERCISES']['BASIC_LOGIN']['LOGIN'], CREDENTIALS['BASIC_LOGIN']['EMAIL'], 30)
+    send_keys_by_xpath(driver, XPATHS['EXERCISES']['BASIC_LOGIN']['LOGIN'], CREDENTIALS['BASIC_LOGIN']['EMAIL'], timeout=30)
     send_keys_by_xpath(driver, XPATHS['EXERCISES']['BASIC_LOGIN']['PASSWORD'], CREDENTIALS['BASIC_LOGIN']['PASSWORD'])
     click_element_by_xpath(driver, XPATHS['EXERCISES']['BASIC_LOGIN']['SIGN_IN'])
     time.sleep(10)
