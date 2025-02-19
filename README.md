@@ -10,4 +10,7 @@
 
 ### Each challange has it's **own README.md** file that will give more informations about it.
 
+### **Example:**
+  ![Example](media/structure_example.png)
+
 *I'm still deciding how I will structure this repository, so be aware it may change.*
