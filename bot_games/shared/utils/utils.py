@@ -4,6 +4,7 @@
 from typing import Callable, Tuple, cast
 
 # External libraries imports
+from selenium.webdriver import Chrome
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webdriver import WebElement
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
@@ -125,3 +126,76 @@ def find_element_by_xpath(
         return element
     except (TimeoutException, NoSuchElementException):
         return None
+
+# 4 ------------------------------------------------------------------------------------------------
+# Automation Anywhere Function
+
+def login_community(driver: WebDriver, locators: dict, username: str, password: str) -> None:
+    """
+    **Authenticate and log into the Automation Anywhere community platform.**
+
+    **To access the community plataform this function performs a sequence of actions:
+    - Accept cookies on the landing page.
+    - Enter the user's email address.
+    - Submit the email to proceed to the password stage.
+    - Enter the user's password.
+    - Submit the login form to finalize the authentication.
+
+    The function retrieves credentials from environment variables and assumes that the XPATHS
+    dictionary is properly configured with the necessary locators for each interaction.**
+
+    **Note:**
+        - Ensure that the environment variables `EMAIL` and `PASSWORD` are set and valid.
+        - Error handling is delegated to the caller; any exceptions raised by the helper functions
+        will propagate up to the calling context.
+
+    Args:
+        driver (WebDriver): Instance of the WebDriver used to login the community.
+        locators (dict): Dictionary containing XPath locators for all required login elements.
+        username (str): The email address used to authenticate.
+        password (str): The password used to authenticate.
+
+    Raises:
+        Exception: Propagates exceptions raised by the helper functions if any interaction fails.
+    """
+    click_element_by_xpath(driver, locators['LANDING_PAGE']['ACCEPT_COOKIES'])
+    click_element_by_xpath(driver, locators['LANDING_PAGE']['COMMUNITY_LOGIN'])
+    send_keys_by_xpath(driver, locators['COMMUNITY_LOGIN']['EMAIL'], username, timeout=30)
+    click_element_by_xpath(driver, locators['COMMUNITY_LOGIN']['SUBMIT_EMAIL'])
+    send_keys_by_xpath(driver, locators['COMMUNITY_LOGIN']['PASSWORD'], password)
+    click_element_by_xpath(driver, locators['COMMUNITY_LOGIN']['SUBMIT_FORM'])
+
+# 5 ------------------------------------------------------------------------------------------------
+# Automation Anywhere Function
+
+def start_challange(challange_url: str, locators: dict, username: str, password: str) -> WebDriver:
+    """
+    **Initialize the WebDriver and start the challenge.**
+
+    **This function performs the following sequence of actions:**
+    - Launch a new Chrome WebDriver instance.
+    - Access the provided challenge URL.
+    - Execute the login process to authenticate into the community.
+    - Start the chosen challange
+
+    Once the challenge has started, the function returns the WebDriver instance for further steps.
+
+    Args:
+        challange_url (str): URL of the Automation Anywhere challenge to be accessed.
+
+    Returns:
+        WebDriver: Instance of the WebDriver where the challenge was started.
+
+    Raises:
+        Exception: Propagates exceptions from any step within the login process.
+    """
+    driver = Chrome()
+    driver.get(challange_url)
+    try:
+        login_community(driver, locators, username, password)
+    except Exception as e:
+        raise Exception(f'Automation Anywhere community login error.\n---\nERROR: {e}')
+    return driver
+
+
+e = 133
