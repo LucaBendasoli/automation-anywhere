@@ -30,6 +30,12 @@ XPATHS = {
 			'LOGIN' : '//*[@id="inputEmail"]',
 			'PASSWORD' : '//*[@id="inputPassword"]',
 			'SIGN_IN' : '//*[contains(text(), "Sign in")]'
+		},
+		'GROCERY_ORDERING' : {
+			'GROCERY_INPUT' : '//*[@placeholder="Enter Grocery Item to Add to List..."]',
+			'ADD_ITEM' : '//*[@id="add_button"]',
+			'AGREE_TERMS' : '//input[@name="agreeToTerms"]',
+			'SUBMIT_ORDER' : '//button[@id="submit_button"]'
 		}
 	}
 }
